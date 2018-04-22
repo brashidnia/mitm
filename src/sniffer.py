@@ -1,5 +1,6 @@
 import socket, sys
 from struct import *
+from sshpubkeys import SSHKey, AuthorizedKeysFile
 
 #create an INET, STREAMing socket
 try:
@@ -53,6 +54,13 @@ while True:
 
     #get data from packet
     data = packet[h_size:]
-
-    print 'Data: ' + data
+    if 'ssh-ed25519 ' in str(data):
+	print('DATA : ' + data)
+	print('SSH DATA: ')
+	":".join("{:02x}".format(ord(c)) for c in STRING)
+#	ssh = AuthorizedKeysFile(str(data), strict=False)
+#	for key in ssh.keys:
+#	    print(key.key_type, key.bits, key.hash_512())
+    else:
+ 	print 'Data: ' + data
     print
